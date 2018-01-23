@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http"; 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/toPromise';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+
 
 @Component({
   selector: 'notes',
@@ -15,8 +17,8 @@ export class NotesComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.notes  =  [
-    {text:"Note one"},
-    {text:"Note two"}
+    {text:'Note one'},
+    {text:'Note two'}
   ] ;
   }
 
@@ -24,19 +26,17 @@ export class NotesComponent implements OnInit {
 
   }
   add() {
-    let note = { text: this.text }
+    const note = { text: this.text }
     this.notes.push(note);
-    this.text = "";
+    this.text = '';
   }
   remove(idx) {
     this.notes.splice(idx,1);
   }
-  getNotes(): Observable <Hero[]> {
-  return this.http.get<Note[]>(this.notesUrl);
-  }
+  // getNotes(): Observable <Note[]> {
+  //  return this.http.get<Note[]>(this.notesUrl);
+  // }
 }
-
-
 
 interface Note {
   text: string;
